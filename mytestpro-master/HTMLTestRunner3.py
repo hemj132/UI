@@ -810,7 +810,7 @@ class HTMLTestRunner(Template_mixin):
             desc = desc,
             script = script,
             caseid = caseid[caseid.find("case"):(int(caseid.find("case"))+8)],
-            image = image[image.find("image"):(int(image.find("jpg"))+3)],
+            image = image[image.find("image"):(int(image.find("png"))+3)],
             status = self.STATUS[n],
         )
         rows.append(row)

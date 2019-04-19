@@ -38,13 +38,14 @@ class MyTest(unittest.TestCase):
 
     def setUp(self):
         self.driver = browser()
+
         self.driver.implicitly_wait(10)
         self.driver.maximize_window()
         print("case " + str(self.case_id()))
 
     def tearDown(self):
         img_id = self.image_id()
-        file_name = img_id + ".jpg"
+        file_name = img_id + ".png"
         insert_img(self.driver, file_name)
         print("image/" + file_name)
         self.driver.quit()

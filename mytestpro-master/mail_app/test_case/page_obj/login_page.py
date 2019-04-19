@@ -9,18 +9,21 @@ class LoginPage(Base):
 
     url = '/'
 
-    login_iframe_loc = "x-URS-iframe"
-    login_username_text_loc = (By.NAME,"email")
+
+    login_username_text_loc = (By.NAME,"account")
     login_password_text_loc = (By.NAME,"password")
-    login_button_loc = (By.ID, "dologin")
+    login_button_loc = (By.ID, "submit")
     login_erro_hint_loc = (By.CLASS_NAME, "ferrorhead")
+    login_erro_hint_loc = (By.XPATH, "/html/head/script[1]")
 
     #把每一个元素封装成一下方法
     def login_iframe(self):
-        self.iframe(self.login_iframe_loc)
+        pass
+        #self.iframe(self.login_iframe_loc)
 
     def login_iframe_out(self):
-        self.iframe_out()
+        pass
+        #self.iframe_out()
 
     def login_username(self,text):
         self.find_element(*self.login_username_text_loc).send_keys(text)
@@ -32,9 +35,15 @@ class LoginPage(Base):
         self.find_element(*self.login_button_loc).click()
 
     def login_error_hint(self):
-        self.login_iframe()
-        return self.find_element(*self.login_erro_hint_loc).text
-        self.login_iframe_out()
+        # self.login_iframe()
+        # self.driver.switch_to_alert()
+        # return self.find_element(*self.login_erro_hint_loc).text
+        # self.login_iframe_out()
+        alert=self.alert()
+        text=alert.text
+        alert.accept()
+        return text
+
 
     def login_action(self,username,password):
         self.login_iframe()

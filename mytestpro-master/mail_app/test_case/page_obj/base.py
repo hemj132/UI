@@ -4,7 +4,7 @@
 # 基本层
 class Base(object):
 
-    def __init__(self,driver,base_url="https://mail.163.com"):
+    def __init__(self,driver,base_url="http://172.30.202.3:8081/zentao"):
         self.driver = driver
         self.base_url = base_url
         self.timeout = 30
@@ -13,8 +13,8 @@ class Base(object):
         url_ = self.base_url + url # = http://www.126.com/index.html
 
         self.driver.get(url_)
-
-        assert self.driver.current_url == url_ ,'Did not land on %s' % url
+        #print(self.driver.current_url)
+        assert url_ in self.driver.current_url  ,'Did not land on %s' % url
 
     def on_page(self,url):
         return self.driver.current_url==(self.base_url+url)
@@ -33,3 +33,5 @@ class Base(object):
 
     def script(self,src):
         return self.driver.execute_script(src)
+    def alert(self):
+       return self.driver.switch_to_alert()

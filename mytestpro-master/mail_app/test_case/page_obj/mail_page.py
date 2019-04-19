@@ -6,7 +6,7 @@ from .base import Base
 
 class MailPage(Base):
     url  = "/"
-    login_success_user_loc = (By.ID,"spnUid")
+    login_success_user_loc = (By.ID,"myname")
 
     def login_success_user(self):
-        return self.find_element(*self.login_success_user_loc).text
+        return str(self.find_element(*self.login_success_user_loc).text).split(' ')

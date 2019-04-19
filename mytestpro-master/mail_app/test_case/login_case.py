@@ -6,6 +6,7 @@ from model import myunit, function
 
 from page_obj.login_page import LoginPage
 from page_obj.mail_page import MailPage
+from page_obj.home_page import homePage
 
 
 class loginTest(myunit.MyTest):
@@ -17,7 +18,7 @@ class loginTest(myunit.MyTest):
         po.open()
         po.login_action("","")
         sleep(2)
-        self.assertEqual(po.login_error_hint(), '请输入帐号')
+        self.assertEqual(po.login_error_hint(), '登录失败，请检查您的用户名或密码是否填写正确。')
 
     def test_login_pawd_null(self):
         '''密码为空登录'''
@@ -25,32 +26,32 @@ class loginTest(myunit.MyTest):
         po.open()
         po.login_action("testaaa","")
         sleep(2)
-        self.assertEqual(po.login_error_hint(), '请输入密码')
+        self.assertEqual(po.login_error_hint(), '登录失败，请检查您的用户名或密码是否填写正确。')
 
     def test_login_user_pawd_error(self):
         '''用户名、密码为错误'''
         po = LoginPage(self.driver)
         po.open()
-        character = random.choice('zyxwvutsrqponmlkjihgfedcba')
+        character = random.choice('登录失败，请检查您的用户名或密码是否填写正确。')
         username = "test" + character
         po.login_action(username,"@#$%")
         sleep(2)
-        self.assertEqual(po.login_error_hint(), '帐号或密码错误')
+        self.assertEqual(po.login_error_hint(), '登录失败，请检查您的用户名或密码是否填写正确。')
 
     def test_login_success(self):
         '''用户名、密码正确，登录成功'''
         po = LoginPage(self.driver)
         po.open()
-        user = "username"
-        po.login_action(user,"password")
+        user = "hemeijian"
+        po.login_action(user,"123456")
         sleep(2)
-        po2 = MailPage(self.driver)
-        self.assertEqual(po2.login_success_user(), user+"@163.com")
+        po2 = homePage(self.driver)
+        self.assertEqual(po2.login_success_user(),'何美建')
 
 
 if __name__ == '__main__':
     #unittest.main()
     suit = unittest.TestSuite()
-    suit.addTest(loginTest("test_login_user_pawd_null"))
+    suit.addTest(loginTest("test_login_success"))
     runner = unittest.TextTestRunner()
     runner.run(suit)

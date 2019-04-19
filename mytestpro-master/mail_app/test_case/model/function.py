@@ -10,14 +10,15 @@ def insert_img(driver, file_name):
     base = base_dir.split('/mail_app')[0]
     file_path = base + "/mail_app/report/image/" + file_name
     print(file_path)
-    driver.get_screenshot_as_file(file_path)
+    print(driver.get_screenshot_as_file(file_path))
+    print(123213214412)
 
 
 if __name__ == '__main__':
     #insert_img("baidu.jpg")
     driver = webdriver.Chrome()
     driver.get("https://www.baidu.com")
-    insert_img(driver, 'baidu.jpg')
+    insert_img(driver, '001.png')
     driver.quit()
 
 
